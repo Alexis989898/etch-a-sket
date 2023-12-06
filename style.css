@@ -19,9 +19,20 @@ body {
     flex-direction: column;
 }
 
+.wrapper-flex {
+    display: flex;
+    gap: 10px;
+}
+
 #btnreschange {
     margin-top: 20px;
     height: 50px;
+}
+
+#btnrainbowmode {
+    margin-top: 20px;
+    height: 50px;
+    color: red;
 }
 
 #canvas {

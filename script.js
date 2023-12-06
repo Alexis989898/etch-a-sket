@@ -1,5 +1,20 @@
 const canvas = document.querySelector("#canvas")
 const ChangeResButton = document.querySelector("#btnreschange");
+const RainbowModeButton = document.querySelector("#btnrainbowmode");
+
+let rainbowmode = false;
+
+RainbowModeButton.addEventListener("click", () => {
+    if(rainbowmode == false) {
+        rainbowmode = true;
+        RainbowModeButton.style = "color: green;"
+        console.log(rainbowmode);
+    } else if(rainbowmode == true){
+        rainbowmode = false;
+        RainbowModeButton.style = "color: red;"
+        console.log(rainbowmode);
+    }
+});
 
 ChangeResButton.addEventListener("click", () => {
     let newRes = 101;
@@ -10,7 +25,6 @@ ChangeResButton.addEventListener("click", () => {
 });
 
 let mouseDown = 0;
-
 document.body.addEventListener('mousedown', (event) => {
     event.preventDefault();
     mouseDown = !mouseDown;
@@ -21,7 +35,6 @@ document.body.addEventListener('mouseup', (event) => {
 });
 
 
-createCanvas(16);
 
 function createCanvas(resolution) {
     const allPixels = document.querySelectorAll(".square-pixel");
@@ -36,10 +49,15 @@ function createCanvas(resolution) {
         squarePixel.style = `width: ${squareSize}px; height: ${squareSize}px;`;
         squarePixel.addEventListener("mousemove", () => {
             if (mouseDown == true) {
-                squarePixel.style.backgroundColor = "black";
+                if(rainbowmode == true) {
+                    squarePixel.style.backgroundColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+                } else {
+                    squarePixel.style.backgroundColor = "black";
+                }
             }
         });
-        //squarePixel.textContent  = i;
         canvas.appendChild(squarePixel);
     }
 }
+
+createCanvas(16);
